@@ -19,53 +19,50 @@ function run {
 # xrandr --output HDMI-1 --primary --auto --output eDP-1 --right-of HDMI-1 --auto
 # screens=($(xrandr | grep -w connected | awk '{print $1}'))
 # xrandr --output ${screens[1]} --primary --auto --output ${screens[0]} --right-of ${screens[1]} --auto --output ${screens[2]} --&
-autorandr --load main &
+autorandr --change &
 
+####################################### Launch Polybar ##########################################
 (sleep 2; run $HOME/.config/polybar/launch.sh) &
 
-#change your keyboard if you need it
+####################################### change your keyboard if you need it #####################
 setxkbmap -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle j
+
+# disable touchpad
+xinput --set-prop "ELAN1200:00 04F3:3090 Touchpad" "Device Enabled" 0
+xinput set-prop 'ELAN0774:00 04F3:3244 Touchpad' 'libinput Natural Scrolling Enabled' 1
+xinput set-prop 'ELAN0774:00 04F3:3244 Touchpad' 'libinput Tapping Enabled' 1
+# xinput set-prop 11 318 1
+xinput set-prop 15 344 1
+xinput set-prop 15 317 1
 
 #cursor active at boot
 xsetroot -cursor_name left_ptr &
 
-# disable touchpad
-xinput --set-prop "ELAN1200:00 04F3:3090 Touchpad" "Device Enabled" 0
-xinput set-prop 11 318 1
+####################################### Set wallpaper ##########################################
+feh --randomize --bg-fill --no-xinerama /usr/share/backgrounds/wallpapers/*
 
-#start ArcoLinux Welcome App
-# run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
-
-#Some ways to set your wallpaper besides variety or nitrogen
-feh --randomize --bg-fill --no-xinerama /usr/share/backgrounds/custom/wallpapers/*
-# feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
-#start the conky to learn the shortcuts
-# (conky -c $HOME/.xmonad/scripts/system-overview) &
-
-#starting utility applications at boot time
-# run variety &
+####################################### Starting utility applications at boot time #############
 run nm-applet &
 run pamac-tray &
 run xfce4-power-manager &
-# run volumeicon &
 numlockx on &
 blueberry-tray &
 picom --config $HOME/.xmonad/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
-emacs --daemon
 thunar --daemon
+# run volumeicon &
+# run variety &
+# emacs --daemon
 
 #starting user applications at boot time
-#nitrogen --restore &
 #run caffeine &
 #run vivaldi-stable &
 #run firefox &
 #run thunar &
 #run spotify &
 #run atom &
-
 #run telegram-desktop &
 #run discord &
 #run dropbox &
