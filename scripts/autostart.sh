@@ -25,7 +25,8 @@ autorandr --change &
 (sleep 2; run $HOME/.config/polybar/launch.sh) &
 
 ####################################### change your keyboard if you need it #####################
-setxkbmap -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle j
+ibus-daemon -rxRd
+# setxkbmap -model pc104 -layout us,bg,cn -variant ,phonetic,altgr-pinyin -option grp:alt_shift_toggle &
 
 # disable touchpad
 xinput --set-prop "ELAN1200:00 04F3:3090 Touchpad" "Device Enabled" 0
