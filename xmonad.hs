@@ -108,8 +108,10 @@ myTerminal :: String
 myTerminal = "kitty"
 
 myBrowser :: String
-myBrowser = "brave" -- "brave-beta"
+myBrowser = "firefox-developer-edition" -- "brave-beta"
 
+myBrowserIncognitoFlag :: String
+myBrowserIncognitoFlag = " --private-window"
 myEmacs :: String
 myEmacs = "emacsclient"
 
