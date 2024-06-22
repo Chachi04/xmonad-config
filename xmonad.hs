@@ -119,7 +119,8 @@ myEditor :: String
 myEditor = myTerminal ++ " -e nvim"
 
 myExplorer :: String
-myExplorer = "thunar"
+-- myExplorer = "thunar"
+myExplorer = myTerminal ++ " --title yazi -e yazi"
 
 myModMask :: KeyMask
 myModMask = mod4Mask
