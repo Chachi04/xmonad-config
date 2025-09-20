@@ -22,9 +22,10 @@ function run {
 autorandr --change &
 
 ####################################### Launch Polybar ##########################################
-(sleep 2; run $HOME/.config/polybar/launch.sh) &
+(sleep 2; run $HOME/.config/polybar/xmonad-launch.sh) &
 
 ####################################### change your keyboard if you need it #####################
+# fcitx5 -d &
 ibus-daemon -rxRd
 # setxkbmap -model pc104 -layout us,bg,cn -variant ,phonetic,altgr-pinyin -option grp:alt_shift_toggle &
 
@@ -40,7 +41,10 @@ xinput set-prop 15 317 1
 xsetroot -cursor_name left_ptr &
 
 ####################################### Set wallpaper ##########################################
-feh --randomize --bg-fill --no-xinerama /usr/share/backgrounds/wallpapers/*
+# feh --randomize --bg-fill --no-xinerama /usr/share/backgrounds/wallpapers/*
+# feh --randomize --bg-fill /home/chachi/personal/wallpapers/*
+feh --bg-fill -z /usr/share/backgrounds/wallpapers/ &
+# /home/chachi/.xmonad/scripts/random_background.sh &
 
 ####################################### Starting utility applications at boot time #############
 run nm-applet &
@@ -51,6 +55,10 @@ blueberry-tray &
 picom --config $HOME/.xmonad/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+####################################### Redshift ###############################################
+# redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | jq -r '"\(.location.lat):\(.location.lng)"') &
+# redshift -t 5700:3600 &
 
 thunar --daemon
 # run volumeicon &

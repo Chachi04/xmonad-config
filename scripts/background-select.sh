@@ -25,10 +25,10 @@
 # you can scroll up and down with keys but will need to click on the desired image.
 
 # get screen resolution
-width="$(xwininfo -root | awk '/Width/ {print $2}')"
-height="$(xwininfo -root | awk '/Height/ {print $2}')"
-# width=800
-# height=600
+# width="$(xwininfo -root | awk '/Width/ {print $2}')"
+# height="$(xwininfo -root | awk '/Height/ {print $2}')"
+width=1920
+height=1080
 # limit window size to 90% of screen size
 width="$(((width/20)*9))"
 height="$(((height/10)*9))"
@@ -48,8 +48,14 @@ scrollstep=$(( (thumbheight+fehquirk) * 1 ))
 # feh -r -t --cache-thumbnails --no-menus --index-info '' --ignore-aspect --stretch \
 # -g ${width}x$height --limit-width $width --thumb-width $thumbwidth --thumb-height $thumbheight \
 # --scroll-step $scrollstep --action ";feh -Z. --title='%f --- %wx%hpx' -g ${width}x$height %F" "$@"
+
+# feh -r -t --cache-thumbnails --no-menus --index-info '' --ignore-aspect --stretch \
+# -g ${width}x$height --limit-width $width --thumb-width $thumbwidth --thumb-height $thumbheight \
+# --scroll-step $scrollstep --action ";feh --bg-fill --no-xinerama %F" "$@"
+
 feh -r -t --cache-thumbnails --no-menus --index-info '' --ignore-aspect --stretch \
 -g ${width}x$height --limit-width $width --thumb-width $thumbwidth --thumb-height $thumbheight \
---scroll-step $scrollstep --action ";feh --bg-fill --no-xinerama %F" "$@"
+--scroll-step $scrollstep --action ";feh --bg-fill %F" "$@"
+
 #--bg $HOME/.config/scripts/feh/grey.gif
 # feh --randomize --bg-fill --no-xinerama /usr/share/backgrounds/custom/wallpapers/*
